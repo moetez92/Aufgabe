@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
+import {errorAction} from "../Actions/errorAction"
+import {validAction} from "../Actions/errorAction"
+import {useDispatch} from "react-redux"
+import {Link} from "react-router-dom";
 export default function Form() {
 
+
+const dispatch = useDispatch();
  const [vorname, setvorname] = useState("");
  const [nachname, setnachname] = useState("");
  const [email, setemail] = useState("");
@@ -13,7 +19,7 @@ export default function Form() {
  const [error,seterror] = useState(false)
 
  // this function is for checking wether all the inputs are filled or not
-  const isValid=()=>{
+  const isFilled=()=>{
   return (vorname !=="" && 
           nachname !=="" && 
           email !=="" && 
@@ -21,6 +27,24 @@ export default function Form() {
           hausnr !=="" && 
           plz !=="")&& 
           ort!==""
+ }
+
+ //this function is for checking whether the email valid or not
+ const isEmail=()=>{
+   const regex = new RegExp(`^\\w*(\\-\\w)?(\\.\\w*)?@\\w*(-\\w*)?\\.\\w{2,3}(\\.\\w{2,3})?$`);
+  
+   if(regex.test(email)) return true ;
+   else return false
+
+ }
+
+ const isWord=(word)=>{
+    const regex = new RegExp(`^[a-zA-Z]{2,100}?$`);
+    return(regex.test(word))
+ }
+ const move=()=>{
+   
+     dispatch(validAction());
  }
 
  // this part is for handling the input in every input field
@@ -49,34 +73,45 @@ const handelEmail=(e)=>{
 // this function is for the generation of user
 
 const generateUser=()=>{
-    if(isValid){
+    
+    
         localStorage.setItem("vorname",vorname);
         localStorage.setItem("nachname",nachname);
         localStorage.setItem("email",email);
         localStorage.setItem("str",str);
-        localStorage.setItem("email",email);
+        localStorage.setItem("hausnr",hausnr);
         localStorage.setItem("plz",plz);
         localStorage.setItem("ort",ort);  
-    }
-    else 
-     seterror(true)
-  
+
+    
+    
+     
 }
 
 // this part is for the inline Styling
-const buttonStyle= isValid()?"btn btn-enabled":"btn btn-disabled"
+const buttonStyle= isFilled()?"btn btn-enabled":"btn btn-disabled"
+ 
+ const SuccessButton =  <Link className={buttonStyle} onClick={generateUser} to="loaduser">User generieren</Link>
+ const FailButton =   <div className={buttonStyle} onClick={()=>dispatch(errorAction())}>User generieren</div>
+
+ const Button = isFilled()&&isEmail()?SuccessButton:FailButton
+ 
     return (
        
                
         <div className="form">
            <div className="avatar-box">
-               <div  className="avatar-circle">
+           <svg width="200px" height="200px">
+           <circle cx="100" cy="100" r="98" stroke="green" stroke-width="4" fill="transparent" />
+   
+       </svg> 
+               {/* <div  className="avatar-circle">
                <i className="avatar-img"><FontAwesomeIcon  icon={faUser}/></i>
-               </div>
+               </div> */}
            </div>
            <div className="inputs"> 
            <div className="row grid">
-          <input type="text" value={vorname} onChange={handelVorname}  placeholder="Vorname"/>
+          <input  classname={`filled-${isWord(vorname)}+ hi`}type="text" value={vorname} onChange={handelVorname}  placeholder="Vorname"/>
           <input type="text"  value={nachname} onChange={handelNachname} placeholder="Nachname"/>
           </div>
           
@@ -90,12 +125,12 @@ const buttonStyle= isValid()?"btn btn-enabled":"btn btn-disabled"
           <div className="row grid fourth">
           <input type="text"   value={plz} onChange={handelPlz} placeholder="PLZ"/>
           <input type="text"  value={ort} onChange={handelOrt} placeholder="Ort"/>
-          </div>
-         
-          <div className={buttonStyle} onClick={generateUser}>User generieren</div>
            
+          </div>
+     
+             {Button}
            </div>
-         
+          
         </div>
       
     )
