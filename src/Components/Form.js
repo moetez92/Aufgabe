@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import {errorAction} from "../Actions/errorAction"
@@ -16,8 +16,9 @@ const dispatch = useDispatch();
  const [hausnr, sethausnr] = useState("");
  const [plz, setplz] = useState("");
  const [ort, setort] = useState("");
- const [error,seterror] = useState(false)
+ const [percentage,setpercentage] = useState(0)
 
+  
  // this function is for checking wether all the inputs are filled or not
   const isFilled=()=>{
   return (vorname !=="" && 
@@ -42,6 +43,17 @@ const dispatch = useDispatch();
     const regex = new RegExp(`^[a-zA-Z]{2,100}?$`);
     return(regex.test(word))
  }
+ const calc=()=>{
+    var nnf=0
+    if(vorname !=="" ){nnf+=1}
+    if(nachname !=="" ){nnf+=1}
+    if(email !=="" ){nnf+=1}
+    if(ort !=="" ){nnf+=1}
+    if(plz !=="" ){nnf+=1}
+    if(hausnr !=="" ){nnf+=1}
+    if(str !=="" ){nnf+=1}
+    return nnf ;
+ }
  const move=()=>{
    
      dispatch(validAction());
@@ -50,24 +62,31 @@ const dispatch = useDispatch();
  // this part is for handling the input in every input field
  const handelVorname=(e)=>{
     setvorname(e.target.value);
+     
 }
 const handelNachname=(e)=>{
     setnachname(e.target.value);
+   
 }
 const handelStr=(e)=>{
     setstr(e.target.value);
+    
 }
 const handelHausnr=(e)=>{
     sethausnr(e.target.value);
+    
 }
 const handelPlz=(e)=>{
     setplz(e.target.value);
+     
 }
 const handelOrt=(e)=>{
     setort(e.target.value);
+  
 }
 const handelEmail=(e)=>{
     setemail(e.target.value);
+     
 }
 
 // this function is for the generation of user
@@ -95,20 +114,29 @@ const buttonStyle= isFilled()?"btn btn-enabled":"btn btn-disabled"
  const FailButton =   <div className={buttonStyle} onClick={()=>dispatch(errorAction())}>User generieren</div>
 
  const Button = isFilled()&&isEmail()?SuccessButton:FailButton
+
+ const nbre = calc()
+ 
  
     return (
        
-               
-        <div className="form">
-           <div className="avatar-box">
-           <svg width="200px" height="200px">
-           <circle cx="100" cy="100" r="98" stroke="green" stroke-width="4" fill="transparent" />
+    
+    <div className="">
+  {nbre>0&&<p className="percentage">{`${nbre*10}%`}</p>}
+<svg  className="circle" width="220px" height="221px">
+  
    
-       </svg> 
-               {/* <div  className="avatar-circle">
+   <circle   cx="100" cy="100" r="98" stroke="#10AC84" strokeDasharray={`${614*(nbre/10)} 614 ` } stroke-strokeDashoffset="200"  stroke-width="7" fill="transparent" />
+ </svg>  
+        <div className="form">
+            <div className="avatar-box">
+            <div  className="avatar-circle">
                <i className="avatar-img"><FontAwesomeIcon  icon={faUser}/></i>
-               </div> */}
-           </div>
+        </div> 
+            </div>
+        
+                 
+          
            <div className="inputs"> 
            <div className="row grid">
           <input  classname={`filled-${isWord(vorname)}+ hi`}type="text" value={vorname} onChange={handelVorname}  placeholder="Vorname"/>
@@ -132,6 +160,10 @@ const buttonStyle= isFilled()?"btn btn-enabled":"btn btn-disabled"
            </div>
           
         </div>
+
+    </div>
+
+        
       
     )
 }
