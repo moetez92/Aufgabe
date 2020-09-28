@@ -56,6 +56,24 @@ const handelEmail=(e)=>{
    
 }
 
+
+const save=()=> {
+    
+    
+  localStorage.setItem("vorname",vorname);
+  localStorage.setItem("nachname",nachname);
+  localStorage.setItem("email",email);
+  localStorage.setItem("str",str);
+  localStorage.setItem("hausnr",hausnr);
+  localStorage.setItem("plz",plz);
+  localStorage.setItem("ort",ort);  
+
+ dispatch(validAction())
+
+
+
+
+}
  
 
  
@@ -67,7 +85,7 @@ const handelEmail=(e)=>{
 
  
    const failSaveButton =   <Link className="btn-2" to="modify" onClick={()=>dispatch(errorAction())}>Speichern</Link>
-   const successSaveButton =   <Link className="btn-2" to="loaduser" >Speichern</Link>
+   const successSaveButton =   <Link className="btn-2" to="loaduser"    onClick={save} >Speichern</Link>
     const saveButton= isHausnr(hausnr)&&isEmail(email)&&isPlz(plz)?successSaveButton:failSaveButton
  
     return (
@@ -99,7 +117,7 @@ const handelEmail=(e)=>{
           </div>
           <div className="row grid fifth">
           <Link className="btn-3" to="loaduser" onClick={()=>dispatch(validAction())}>Abrechen</Link>
-          <Link className="btn-2">Speichern</Link>
+         {saveButton}
           </div>
          
          

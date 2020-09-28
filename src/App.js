@@ -5,6 +5,7 @@ import React from 'react';
  import ErrorBox from "./Components/Errorbox"
  import LoadUser from "./Components/LoadUser"
  import Modify from "./Components/modify"
+ import Success from "./Components/Success"
  import store from "./store";
 
  import {Provider} from "react-redux"
@@ -33,6 +34,10 @@ function App() {
            <Route path="/modify">
            <Modify/> 
            </Route> 
+           
+           <Route path="/success">
+           <Success/> 
+           </Route>
            <Route path="/">
            <Form/> 
            </Route>

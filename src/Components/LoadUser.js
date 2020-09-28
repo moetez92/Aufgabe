@@ -34,7 +34,7 @@ const dispatch = useDispatch();
 const spinnerform =loading?"spinnerform":"";
  
 const failSaveButton =   <Link className="btn-2" to="modify" onClick={()=>dispatch(errorAction())}>User Anlegen</Link>
-const successSaveButton =   <Link className="btn-2" to="modify" >User Anlegen</Link>
+const successSaveButton =   <Link className="btn-2" to="success" >User Anlegen</Link>
  const saveButton= isHausnr(hausnr)&&isEmail(email)&&isPlz(plz)?successSaveButton:failSaveButton
 
 
@@ -69,7 +69,7 @@ const successSaveButton =   <Link className="btn-2" to="modify" >User Anlegen</L
           </div>
           
          <div className="row">
-           <input  className="email"  className="add-input"   value={email}  placeholder="Email" disabled/>
+           <input  className="email add-input"    value={email}  placeholder="Email" disabled/>
          </div>
           <div className="row grid third">
           <input type="text"    className="add-input"  value={str} placeholder="Straße" disabled/>
