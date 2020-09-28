@@ -21,16 +21,19 @@ const dispatch = useDispatch();
  
  
 
- 
+ // getting the load state from the Redux store
  const loading = useSelector(state=>state.load)
+ // getting the random img fetched from the get API
   const img = useSelector(state=>state.img)
+
+  // Styling the image in the avatar
   const background={
     backgroundImage: "url(" + img + ")",
     backgroundRepeat  : 'no-repeat',
      backgroundPosition: 'center',
      backgroundSize: 'cover' 
   }
-
+// intialising the spinner
 const spinnerform =loading?"spinnerform":"";
  
 const failSaveButton =   <Link className="btn-2" to="modify" onClick={()=>dispatch(errorAction())}>User Anlegen</Link>

@@ -1,3 +1,6 @@
+
+//this action is for loading the image from the Api
+
 import { loadingTrue } from "./loadingAction";
 import { loadingFalse } from "./loadingAction";
 

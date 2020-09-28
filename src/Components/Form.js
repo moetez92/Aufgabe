@@ -34,7 +34,7 @@ const dispatch = useDispatch();
 
 
 
-
+//this fuction calculates the pourcentage of the filled inputs
  const calc=()=>{
     var nnf=0
     if(vorname !=="" ){nnf+=1}
@@ -46,10 +46,7 @@ const dispatch = useDispatch();
     if(str !=="" ){nnf+=1}
     return nnf ;
  }
- const move=()=>{
-   
-     dispatch(validAction());
- }
+  
 
  // this part is for handling the input in every input field
  const handelVorname=(e)=>{
@@ -85,7 +82,7 @@ const handelEmail=(e)=>{
 
 const generateUser=()=> {
     
-    
+       // Save the input data in the local storage
         localStorage.setItem("vorname",vorname);
         localStorage.setItem("nachname",nachname);
         localStorage.setItem("email",email);
@@ -93,7 +90,7 @@ const generateUser=()=> {
         localStorage.setItem("hausnr",hausnr);
         localStorage.setItem("plz",plz);
         localStorage.setItem("ort",ort);  
-
+      // Dispatching the Load action
        dispatch(load())
 
     
@@ -101,9 +98,10 @@ const generateUser=()=> {
      
 }
 
-// this part is for the inline Styling
+// this part is for the inline Styling of the button
 const buttonStyle= isFilled()?"btn btn-enabled":"btn btn-disabled"
- 
+  
+//this part is for the different form of the User generation button  in terms of the different scenarios 
  const SuccessButton =  <Link className={buttonStyle} onClick={generateUser} to="loaduser">User generieren</Link>
   const FailButton =   <div className={buttonStyle}>User generieren</div>
 //  const FailButton =   <div className={buttonStyle} onClick={()=>dispatch(errorAction())}>User generieren</div>
@@ -117,17 +115,25 @@ const buttonStyle= isFilled()?"btn btn-enabled":"btn btn-disabled"
        
     
     <div className="">
-  {nbre>0&&<p className="percentage">{`${nbre*10}%`}</p>}
-<svg  className="circle" width="220px" height="221px">
-  
-   
-   <circle   cx="100" cy="100" r="98" stroke="#10AC84" strokeDasharray={`${614*(nbre/10)} 614 ` } stroke-strokeDashoffset="200"  stroke-width="7" fill="transparent" />
- </svg>  
+ 
+ 
         <div className="form">
             <div className="avatar-box">
+     
+ 
             <div  className="avatar-circle">
                <i className="avatar-img"><FontAwesomeIcon  icon={faUser}/></i>
+              <div className="svg-container">
+              <svg  className="circle" width="222px" height="222px">
+                
+  
+   
+  <circle   cx="100" cy="100" r="97" stroke="#10AC84" strokeDasharray={`${614*(nbre/10)} 614 ` } stroke-strokeDashoffset="200"  stroke-width="7" fill="transparent" />
+</svg>
+              </div>
         </div> 
+        {nbre>0&&<p className="percentage">{`${nbre*10}%`}</p>}
+ 
             </div>
         
                  
