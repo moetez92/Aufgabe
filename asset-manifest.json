@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/http//moetez92.github.io/Aufgabe/static/css/main.729f705a.chunk.css",
+    "main.js": "/http//moetez92.github.io/Aufgabe/static/js/main.9d083afa.chunk.js",
+    "main.js.map": "/http//moetez92.github.io/Aufgabe/static/js/main.9d083afa.chunk.js.map",
+    "runtime-main.js": "/http//moetez92.github.io/Aufgabe/static/js/runtime-main.28cf466f.js",
+    "runtime-main.js.map": "/http//moetez92.github.io/Aufgabe/static/js/runtime-main.28cf466f.js.map",
+    "static/js/2.3bd152bb.chunk.js": "/http//moetez92.github.io/Aufgabe/static/js/2.3bd152bb.chunk.js",
+    "static/js/2.3bd152bb.chunk.js.map": "/http//moetez92.github.io/Aufgabe/static/js/2.3bd152bb.chunk.js.map",
+    "index.html": "/http//moetez92.github.io/Aufgabe/index.html",
+    "precache-manifest.3b5d4c01bd326aade3a3d4932109f456.js": "/http//moetez92.github.io/Aufgabe/precache-manifest.3b5d4c01bd326aade3a3d4932109f456.js",
+    "service-worker.js": "/http//moetez92.github.io/Aufgabe/service-worker.js",
+    "static/css/main.729f705a.chunk.css.map": "/http//moetez92.github.io/Aufgabe/static/css/main.729f705a.chunk.css.map",
+    "static/js/2.3bd152bb.chunk.js.LICENSE.txt": "/http//moetez92.github.io/Aufgabe/static/js/2.3bd152bb.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.28cf466f.js",
+    "static/js/2.3bd152bb.chunk.js",
+    "static/css/main.729f705a.chunk.css",
+    "static/js/main.9d083afa.chunk.js"
+  ]
+}
