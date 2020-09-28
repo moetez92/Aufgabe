@@ -4,7 +4,7 @@ import React from 'react';
  import Form from "./Components/Form"
  import ErrorBox from "./Components/Errorbox"
  import LoadUser from "./Components/LoadUser"
- import Bearbeitung from "./Components/Bearbeitung"
+ import Modify from "./Components/modify"
  import store from "./store";
 
  import {Provider} from "react-redux"
@@ -30,8 +30,8 @@ function App() {
           <LoadUser/>
           </Route>
           
-           <Route path="/bearbeitung">
-           <Bearbeitung/> 
+           <Route path="/modify">
+           <Modify/> 
            </Route> 
            <Route path="/">
            <Form/> 

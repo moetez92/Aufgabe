@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
 import {errorAction} from "../Actions/errorAction"
-import {validAction} from "../Actions/errorAction"
+ import {isEmail,isPlz,isHausnr} from "../Helpers/Helpers"
 import {Link} from "react-router-dom";
 import {useDispatch,useSelector} from "react-redux"
 import "./spinner.css"
@@ -35,12 +33,16 @@ const dispatch = useDispatch();
 
 const spinnerform =loading?"spinnerform":"";
  
+const failSaveButton =   <Link className="btn-2" to="modify" onClick={()=>dispatch(errorAction())}>User Anlegen</Link>
+const successSaveButton =   <Link className="btn-2" to="modify" >User Anlegen</Link>
+ const saveButton= isHausnr(hausnr)&&isEmail(email)&&isPlz(plz)?successSaveButton:failSaveButton
 
 
- 
 
-console.log(spinnerform)
- 
+ const failCancelButton = <Link to="modify" className="btn-3"  onClick={()=>dispatch(errorAction())}>Bearbeiten</Link>
+ const successCancelButton =   <Link to="modify" className="btn-3">Bearbeiten</Link>
+  const cancelButton= isHausnr(hausnr)&&isEmail(email)&&isPlz(plz)?successCancelButton:failCancelButton
+
     return (
        
                
@@ -62,47 +64,28 @@ console.log(spinnerform)
            </div>
            <div className="inputs"> 
            <div className="row grid">
-          <input    value={vorname}    placeholder="Vorname" disabled/>
-          <input type="text"   value={nachname}   placeholder="Nachname" disabled/>
+          <input    value={vorname} className="add-input"   placeholder="Vorname" disabled/>
+          <input type="text"   value={nachname} className="add-input"   placeholder="Nachname" disabled/>
           </div>
           
          <div className="row">
-           <input  className="email"   value={email}  placeholder="Email" disabled/>
+           <input  className="email"  className="add-input"   value={email}  placeholder="Email" disabled/>
          </div>
           <div className="row grid third">
-          <input type="text"     value={str} placeholder="Straße" disabled/>
-          <input type="text"  value={hausnr}   placeholder="Hsnr." disabled />
+          <input type="text"    className="add-input"  value={str} placeholder="Straße" disabled/>
+          <input type="text" className="add-input"  value={hausnr}   placeholder="Hsnr." disabled />
           </div>
           <div className="row grid fourth">
-          <input type="text"    value={plz}  placeholder="PLZ" disabled />
-          <input type="text"    value={ort}  placeholder="Ort" disabled />
+          <input type="text" className="add-input"    value={plz}  placeholder="PLZ" disabled />
+          <input type="text" className="add-input"    value={ort}  placeholder="Ort" disabled />
           </div>
           <div className="row grid fifth">
-          <Link to="bearbeitung" className="btn-3">Bearbeiten</Link>
-          <div className="btn-2">User ablegen</div>
+           {cancelButton}
+           {saveButton}
           </div>
-         
-         
-    
-          
+          </div>
            </div>
-
-
-
-
-
-
-
-
-
-
-
-        </div>
-
-
-
-
-         )}
+ )}
         </div>
        
       

@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
-import {errorAction} from "../Actions/errorAction"
+ 
 import {validAction} from "../Actions/errorAction"
 import {load} from "../Actions/loadAcion"
 import {isEmail,isWord} from "../Helpers/Helpers"
@@ -105,9 +105,10 @@ const generateUser=()=> {
 const buttonStyle= isFilled()?"btn btn-enabled":"btn btn-disabled"
  
  const SuccessButton =  <Link className={buttonStyle} onClick={generateUser} to="loaduser">User generieren</Link>
- const FailButton =   <div className={buttonStyle} onClick={()=>dispatch(errorAction())}>User generieren</div>
+  const FailButton =   <div className={buttonStyle}>User generieren</div>
+//  const FailButton =   <div className={buttonStyle} onClick={()=>dispatch(errorAction())}>User generieren</div>
 
- const Button = isFilled()&&isEmail(email)?SuccessButton:FailButton
+ const Button = isFilled()?SuccessButton:FailButton
 
  const nbre = calc()
  

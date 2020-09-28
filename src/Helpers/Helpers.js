@@ -13,3 +13,15 @@
     return(regex.test(word))
  }
 
+ export  const isPlz=(word)=>{
+   const regex = new RegExp(`^\\d\\d\\d\\d\\d$`);
+   return(regex.test(word))
+}
+
+export  const isHausnr=(word)=>{
+   const regex = new RegExp(`^\\d\\d`);
+   return(regex.test(word))
+}
+
+ 
+

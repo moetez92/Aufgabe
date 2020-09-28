@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUser } from '@fortawesome/free-solid-svg-icons'
-import {errorAction} from "../Actions/errorAction"
 import {validAction} from "../Actions/errorAction"
 import {useDispatch} from "react-redux"
-export default function Bearbeitung() {
+import {isEmail,isPlz,isHausnr} from "../Helpers/Helpers"
+import {Link} from "react-router-dom";
+import {errorAction} from "../Actions/errorAction"
+export default function Modify() {
 
 
 const dispatch = useDispatch();
@@ -18,8 +18,13 @@ const dispatch = useDispatch();
  const [error,seterror] = useState(false)
 
  
- 
- 
+ const img = localStorage.getItem("img")
+ const background={
+  backgroundImage: "url(" + img + ")",
+  backgroundRepeat  : 'no-repeat',
+   backgroundPosition: 'center',
+   backgroundSize: 'cover' 
+}
 
  // this part is for handling the input in every input field
  const handelVorname=(e)=>{
@@ -55,10 +60,15 @@ const handelEmail=(e)=>{
 
  
 
+  const validHausnr=isHausnr(hausnr)?"valid":"invalid";
+   const validPlz=isPlz(plz)?"valid":"invalid";
+   const validemail=isEmail(email)?"valid":"invalid";
+
 
  
-
-  
+   const failSaveButton =   <Link className="btn-2" to="modify" onClick={()=>dispatch(errorAction())}>Speichern</Link>
+   const successSaveButton =   <Link className="btn-2" to="loaduser" >Speichern</Link>
+    const saveButton= isHausnr(hausnr)&&isEmail(email)&&isPlz(plz)?successSaveButton:failSaveButton
  
     return (
        
@@ -66,8 +76,8 @@ const handelEmail=(e)=>{
         <div className="form">
         
         <div className="avatar-box">
-               <div  className="avatar-circle">
-               <i className="avatar-img"><FontAwesomeIcon  icon={faUser}/></i>
+               <div  style={background} className="avatar-circle">
+                
                </div>
            </div>
            <div className="inputs"> 
@@ -77,19 +87,19 @@ const handelEmail=(e)=>{
           </div>
           
          <div className="row">
-           <input  className="email input-modify"     value={email}  onChange={handelEmail} placeholder="Email" />
+           <input  className={`email input-modify ${validemail}`}   value={email}  onChange={handelEmail} placeholder="Email" />
          </div>
           <div className="row grid third">
           <input type="text"   className="input-modify"  onChange={handelStr} value={str} placeholder="Straße"/>
-          <input type="text"  className="input-modify" value={hausnr} onChange={handelHausnr}  placeholder="Hsnr." />
+          <input type="text"  className={`input-modify ${validHausnr}`} value={hausnr} onChange={handelHausnr}  placeholder="Hsnr." />
           </div>
           <div className="row grid fourth">
-          <input type="text"   className="input-modify" onChange={handelPlz} value={plz}  placeholder="PLZ"  />
+          <input type="text"   className={`input-modify ${validPlz}`} onChange={handelPlz} value={plz}  placeholder="PLZ"  />
           <input type="text"   className="input-modify"  value={ort} onChange={handelOrt}  placeholder="Ort"  />
           </div>
           <div className="row grid fifth">
-          <div className="btn-3">Abrechen</div>
-          <div className="btn-2">Speichern</div>
+          <Link className="btn-3" to="loaduser" onClick={()=>dispatch(validAction())}>Abrechen</Link>
+          <Link className="btn-2">Speichern</Link>
           </div>
          
          
