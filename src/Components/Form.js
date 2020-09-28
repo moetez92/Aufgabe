@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import {errorAction} from "../Actions/errorAction"
 import {validAction} from "../Actions/errorAction"
+import {load} from "../Actions/loadAcion"
+import {isEmail,isWord} from "../Helpers/Helpers"
 import {useDispatch} from "react-redux"
 import {Link} from "react-router-dom";
 export default function Form() {
@@ -30,19 +32,9 @@ const dispatch = useDispatch();
           ort!==""
  }
 
- //this function is for checking whether the email valid or not
- const isEmail=()=>{
-   const regex = new RegExp(`^\\w*(\\-\\w)?(\\.\\w*)?@\\w*(-\\w*)?\\.\\w{2,3}(\\.\\w{2,3})?$`);
-  
-   if(regex.test(email)) return true ;
-   else return false
 
- }
 
- const isWord=(word)=>{
-    const regex = new RegExp(`^[a-zA-Z]{2,100}?$`);
-    return(regex.test(word))
- }
+
  const calc=()=>{
     var nnf=0
     if(vorname !=="" ){nnf+=1}
@@ -91,7 +83,7 @@ const handelEmail=(e)=>{
 
 // this function is for the generation of user
 
-const generateUser=()=>{
+const generateUser=()=> {
     
     
         localStorage.setItem("vorname",vorname);
@@ -101,6 +93,8 @@ const generateUser=()=>{
         localStorage.setItem("hausnr",hausnr);
         localStorage.setItem("plz",plz);
         localStorage.setItem("ort",ort);  
+
+       dispatch(load())
 
     
     
@@ -113,7 +107,7 @@ const buttonStyle= isFilled()?"btn btn-enabled":"btn btn-disabled"
  const SuccessButton =  <Link className={buttonStyle} onClick={generateUser} to="loaduser">User generieren</Link>
  const FailButton =   <div className={buttonStyle} onClick={()=>dispatch(errorAction())}>User generieren</div>
 
- const Button = isFilled()&&isEmail()?SuccessButton:FailButton
+ const Button = isFilled()&&isEmail(email)?SuccessButton:FailButton
 
  const nbre = calc()
  
@@ -139,20 +133,20 @@ const buttonStyle= isFilled()?"btn btn-enabled":"btn btn-disabled"
           
            <div className="inputs"> 
            <div className="row grid">
-          <input  classname={`filled-${isWord(vorname)}+ hi`}type="text" value={vorname} onChange={handelVorname}  placeholder="Vorname"/>
-          <input type="text"  value={nachname} onChange={handelNachname} placeholder="Nachname"/>
+          <input  className={`filled-${isWord(vorname)} add-input`} type="text" value={vorname} onChange={handelVorname}  placeholder="Vorname"/>
+          <input type="text" className="add-input"  value={nachname} onChange={handelNachname} placeholder="Nachname"/>
           </div>
           
          <div className="row">
-           <input  className="email" type="text" value={email} onChange={handelEmail} placeholder="Email"/>
+           <input  className="email  add-input" type="text" value={email} onChange={handelEmail} placeholder="Email"/>
          </div>
           <div className="row grid third">
-          <input type="text"  value={str} onChange={handelStr} placeholder="Straße"/>
-          <input type="text" value={hausnr} onChange={handelHausnr} placeholder="Hsnr."/>
+          <input type="text" className="add-input"  value={str} onChange={handelStr} placeholder="Straße"/>
+          <input type="text" className="add-input" value={hausnr} onChange={handelHausnr} placeholder="Hsnr."/>
           </div>
           <div className="row grid fourth">
-          <input type="text"   value={plz} onChange={handelPlz} placeholder="PLZ"/>
-          <input type="text"  value={ort} onChange={handelOrt} placeholder="Ort"/>
+          <input type="text"  className="add-input" value={plz} onChange={handelPlz} placeholder="PLZ"/>
+          <input type="text"  className="add-input" value={ort} onChange={handelOrt} placeholder="Ort"/>
            
           </div>
      

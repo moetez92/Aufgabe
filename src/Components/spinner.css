@@ -1,0 +1,21 @@
+.spinner{
+    display: absolute;
+    border: 6px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 6px solid  #10AC84;;
+    left:500;
+    animation: spin 1.5s linear infinite;
+    height: 192px ;
+    width: 192px ;
+   
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+ .spinnerform{
+     display: flex;
+     justify-content: center;
+     align-items: center;
+ }

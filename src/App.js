@@ -4,7 +4,9 @@ import React from 'react';
  import Form from "./Components/Form"
  import ErrorBox from "./Components/Errorbox"
  import LoadUser from "./Components/LoadUser"
+ import Bearbeitung from "./Components/Bearbeitung"
  import store from "./store";
+
  import {Provider} from "react-redux"
  import {
   BrowserRouter as Router,
@@ -27,9 +29,13 @@ function App() {
           <Route path="/loaduser">
           <LoadUser/>
           </Route>
-          <Route path="/">
-           <Form/> 
+          
+           <Route path="/bearbeitung">
+           <Bearbeitung/> 
            </Route> 
+           <Route path="/">
+           <Form/> 
+           </Route>
         </Switch>
 
 
