@@ -17,8 +17,7 @@ const dispatch = useDispatch();
  const [str, setstr] = useState("");
  const [hausnr, sethausnr] = useState("");
  const [plz, setplz] = useState("");
- const [ort, setort] = useState("");
- const [percentage,setpercentage] = useState(0)
+ const [ort, setort] = useState(""); 
 
   
  // this function is for checking wether all the inputs are filled or not

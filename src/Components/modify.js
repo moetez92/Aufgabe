@@ -15,7 +15,7 @@ const dispatch = useDispatch();
  const [hausnr, sethausnr] = useState(localStorage.getItem("hausnr"));
  const [plz, setplz] = useState(localStorage.getItem("plz"));
  const [ort, setort] = useState(localStorage.getItem("ort"));
- const [error,seterror] = useState(false)
+  
 
  
  const img = localStorage.getItem("img")
