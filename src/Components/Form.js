@@ -124,11 +124,8 @@ const buttonStyle= isFilled()?"btn btn-enabled":"btn btn-disabled"
                <i className="avatar-img"><FontAwesomeIcon  icon={faUser}/></i>
               <div className="svg-container">
               <svg  className="circle" width="222px" height="222px">
-                
-  
-   
-  <circle   cx="100" cy="100" r="97" stroke="#10AC84" strokeDasharray={`${614*(nbre/10)} 614 ` } stroke-strokeDashoffset="200"  stroke-width="7" fill="transparent" />
-</svg>
+                <circle   cx="100" cy="100" r="97" stroke="#10AC84" strokeDasharray={`${614*(nbre/10)} 614 ` } stroke-strokedashoffset="200"  strokeWidth="7" fill="transparent" />
+                 </svg>
               </div>
         </div> 
         {nbre>0&&<p className="percentage">{`${nbre*10}%`}</p>}
